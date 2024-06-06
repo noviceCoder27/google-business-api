@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reviews</title>
+</head>
+<body>
+  <h1>Reviews</h1>
+  <% reviews.forEach(function(review) { %>
+    <h2><%= review.comment %></h2>
+    <form action="/reply" method="post">
+      <input type="hidden" name="access_token" value="<%= access_token %>">
+      <input type="hidden" name="account_id" value="<%= accountId %>">
+      <input type="hidden" name="location_id" value="<%= locationId %>">
+      <input type="hidden" name="reviewId" value="<%= review.reviewId %>">
+      <textarea name="reply" placeholder="Write a response..."></textarea>
+      <button type="submit">Post Response</button>
+    </form>
+  <% }); %>
+</body>
+</html>
