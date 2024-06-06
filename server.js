@@ -4,7 +4,7 @@ const querystring = require('querystring');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port =process.env.PORT || 3000;
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
@@ -52,8 +52,8 @@ app.get('/oauth2callback', async (req, res) => {
 
 app.get('/accounts', async (req, res) => {
   const access_token = req.query.access_token;
-  const accountsEndpoint = `https://mybusinessaccountmanagement.googleapis.com/v1/accounts`;
-
+  const accountsEndpoint = `https://mybusinessbusinessinformation.googleapis.com/v1/accounts`;
+  
   try {
     const response = await axios.get(accountsEndpoint, {
       headers: {
@@ -126,7 +126,7 @@ app.post('/reply', async (req, res) => {
   const replyEndpoint = `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/reviews/${reviewId}/reply`;
 
   try {
-    const response = await axios.put(replyEndpoint, {
+    await axios.put(replyEndpoint, {
       comment: reply
     }, {
       headers: {
